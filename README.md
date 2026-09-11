@@ -13,9 +13,9 @@ cai hoje, a trilha inteira com as lacunas marcadas, flashcards para treinar e as
 
 ---
 
-## Instalar
+## Começar
 
-Três passos. Não tem quarto.
+Três passos, e nenhum deles é instalar alguma coisa no seu computador.
 
 **1. Instale o Claude Code**, se ainda não tiver: [claude.com/product/claude-code](https://claude.com/product/claude-code)
 
@@ -29,14 +29,14 @@ onde você quiser. Se você usa git, pode clonar.
 Ele confere que está tudo no lugar, faz quatro perguntas rápidas sobre você, e já começa o seu
 primeiro assunto.
 
-Não tem instalação de verdade para fazer: as skills já vêm na pasta e o Claude Code carrega
-sozinho ao abrir. O `/instalar` existe para te conhecer uma vez só, em vez de perguntar as
-mesmas coisas a cada matéria nova.
+O nome engana de propósito, porque é o que todo mundo digita. Nada é instalado: a máquina já
+veio pronta dentro da pasta e o Claude Code carrega sozinho ao abrir. O `/instalar` serve para
+te conhecer uma vez só, em vez de perguntar as mesmas coisas a cada matéria nova.
 
 Da segunda vez em diante, é só abrir e dizer **continuar**.
 
-**Quer ver antes de instalar?** Abra `_motor/exemplo/painel.html` depois de baixar. É um estudo
-de aprendizado de máquina já em andamento, para você ver com o que se parece.
+**Quer ver antes?** Abra `_motor/exemplo/painel.html` assim que baixar. É um estudo de
+aprendizado de máquina já em andamento, para você ver com o que a coisa se parece.
 
 ---
 
@@ -74,8 +74,8 @@ Fale normal. A máquina entende a intenção e escolhe o que fazer.
 | me testa | monta um teste de recuperação e corrige com você |
 | o que preciso revisar | calcula o que está na hora de voltar e conduz a revisão |
 | olha esse artigo e me ensina | lê, avalia a fonte, e transforma em módulo de estudo |
-| transforma isso em flashcards | gera o arquivo |
-| como estou indo | painel do assunto, com o que está fraco e por quê |
+| transforma isso em flashcards | cria o baralho e põe na aba Estudar da sua página |
+| como estou indo | mostra o resumo na conversa e atualiza a sua página |
 | salvar | guarda no git, se você usa git |
 
 Você também pode chamar direto: `/instalar`, `/estudar`, `/aula`, `/testar`, `/revisar`,
@@ -127,8 +127,9 @@ que sustenta muitos outros nunca fica muito tempo fora.
 **Não te avisa sozinha.** Não existe nada rodando quando você fecha o Claude. A data da próxima
 revisão fica escrita e aparece quando você abre. Você precisa voltar.
 
-**Não gera PDF nem slide.** Gera markdown, que o GitHub mostra bonito e que qualquer editor
-imprime em PDF. Isso foi escolha: sem dependência, sem instalação, sem quebrar.
+**Não gera PDF nem slide.** Gera a página, que abre no navegador, e markdown, que qualquer
+editor imprime em PDF pelo atalho de impressão. Foi escolha: nada para instalar é também nada
+para quebrar.
 
 **Não sabe o que você não contou.** Se você disser que já sabe uma coisa, ela sonda antes de
 acreditar. Nível declarado é quase sempre otimista, e isso não é defeito seu, é de todo mundo.
