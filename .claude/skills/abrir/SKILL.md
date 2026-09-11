@@ -1,71 +1,106 @@
 ---
 name: abrir
-description: Abre a sessão de estudo. Lê a memória e o estado de todos os assuntos, e devolve em poucas linhas onde ela parou, o que vence hoje e qual o próximo passo. Use quando ela disser "abrir", "oi", "voltei", "continuar", ou no primeiro turno de um chat novo.
+description: Abre a sessão de estudo. Lê a memória e o estado de todos os assuntos, cumprimenta pelo nome, e propõe o que fazer hoje. Use quando ela disser "abrir", "oi", "voltei", "continuar", ou no primeiro turno de um chat novo.
 ---
 
 # abrir
 
 O par de `salvar`. Uma fecha a sessão, esta abre a seguinte.
 
-O problema que resolve: chat novo não lembra de nada. A memória está em arquivo, e alguém
-precisa lê-la antes da primeira frase. É esta skill.
+O problema que resolve: chat novo não lembra de nada. Toda a memória está em arquivo, e alguém
+precisa lê-la antes da primeira frase.
 
-## Leia, nesta ordem
+**Leia `_motor/voz.md` antes de escrever qualquer coisa.** Esta é a primeira mensagem que ela
+lê no dia, e é aqui que o sistema parece um assistente ou parece um terminal.
 
-1. `_memoria/estudante.md`, que diz quem ela é. **Se não existir, carregue `instalar`** e pare
-   aqui: é a primeira vez dela.
-2. Todo `STUDY/*/dashboard.md` e `STUDY/*/grafo.md`.
-3. A sessão mais recente de cada assunto, em `STUDY/*/sessoes/`.
+## Leia, em silêncio
 
-Não narre a leitura. Ninguém quer ver "lendo o arquivo tal". Ela quer saber onde parou.
+1. `_memoria/estudante.md`, que diz quem ela é
+2. Todo `STUDY/*/dashboard.md` e `STUDY/*/grafo.md`
+3. A última sessão de cada assunto, em `STUDY/*/sessoes/`
+4. `STUDY/*/duvidas.md`, se existir
 
-## Responda curto
+Não narre nada disso. Ninguém quer ler "consultando o arquivo tal".
 
-Teto de seis linhas. A tentação é despejar tudo que você acabou de ler, e é exatamente isso que
-faz a pessoa fechar a janela.
+## Se faltar o nome
 
-**Um assunto só:**
+Se `_memoria/estudante.md` não existir, ou existir sem nome:
 
-> **Biologia celular** · 12 de 34 conceitos · última sessão sexta
-> Hoje vencem 3 revisões, e uma delas é osmose, que você errou das duas vezes.
-> Começo por elas e depois seguimos em transporte ativo, que é o próximo da trilha.
+**Nunca abra com relatório para alguém que você não sabe como chamar.** Pergunte, sozinho,
+antes de tudo:
 
-E vá. Carregue `revisar` ou `aula` e comece. Não pergunte "posso começar?".
+> Oi. Antes de começar, como você prefere que eu te chame?
 
-**Mais de um assunto:**
+Aí sim siga. Se além do nome faltar o resto do perfil e ela não tiver nenhum assunto começado,
+carregue `instalar`, que é a primeira vez dela de verdade.
 
-> **Biologia celular** · 12 de 34 · 3 revisões vencendo hoje
-> **Estatística** · 5 de 28 · nada vence, parada há 9 dias
+Se ela **tem** estudo em andamento e só falta o perfil (caso de quem começou numa versão
+antiga), pergunte só o nome, escreva `_memoria/estudante.md` com ele, e continue normal. Não
+faça ela passar por onboarding no meio do caminho.
+
+## A abertura
+
+Três coisas, nesta ordem, em linguagem de gente:
+
+**1. Cumprimente pelo nome.** Uma linha. Sem "espero que esteja bem".
+
+**2. Diga onde ela está, contando o que importa.** Não é status, é contexto. Número solto não
+diz nada; número com consequência diz tudo.
+
+> ❌ Biologia celular: 12/34. 3 revisões vencidas. Módulo: membrana.
 >
-> Por qual vamos?
+> ✅ Biologia está andando bem, 12 dos 34 conceitos já firmes. Hoje três voltam pra revisão, e
+> uma delas é osmose, que te pegou nas duas últimas vezes.
 
-Aqui a pergunta é legítima: você não tem como adivinhar. Mas diga qual você faria primeiro, e
-por quê, em vez de só listar.
+**3. Proponha, e deixe a porta aberta.** Você sabe o que está vencido, ela não. Decida.
 
-**Nenhum assunto ainda:**
+> Faço assim: começo pelas revisões, uns dez minutos, e aí a gente entra em transporte ativo,
+> que é o próximo da trilha e já está liberado.
+>
+> Se você veio com outra coisa na cabeça, ou com alguma dúvida, me fala que eu mudo o plano.
 
-> Você ainda não começou nenhuma matéria. O que quer aprender?
+Depois disso **comece**. Carregue `revisar` ou `aula` e vá. Não espere o "pode ir".
+
+## Mais de um assunto
+
+Aqui a pergunta é legítima, você não tem como adivinhar. Mas não entregue uma lista crua:
+diga o estado de cada um em uma linha, recomende um, e dê o motivo.
+
+> Oi, Marina. Você tem dois em andamento.
+>
+> Biologia está com 3 revisões vencendo hoje. Estatística está parada há 9 dias, e lá são 6.
+>
+> Eu iria de estatística, porque é a que está começando a escorregar. Mas se a prova de
+> biologia está perto, a gente inverte. Qual delas?
+
+## Nenhum assunto ainda
+
+Ela foi apresentada ao sistema mas nunca começou. Não repita o onboarding.
+
+> Oi, Marina. Você ainda não começou nenhuma matéria.
+>
+> O que você quer aprender? Pode ser qualquer coisa, e pode ser vago: "quero entender melhor
+> estatística" já me serve para montar o caminho.
 
 E carregue `estudar` quando ela responder.
 
-## Três coisas que valem uma linha a mais
+## Três situações que mudam a abertura
 
-**Sumiu por mais de 30 dias.** Diga, e aplique a regra "quando ela some" de
-`_motor/repeticao-espacada.md` antes de propor conteúdo novo. Comece por sondagem, não por
-aula.
+**Sumiu por mais de 30 dias.** Diga o tamanho da fila, diga que não vai fazer tudo hoje, e
+normalize o esquecimento antes que ela se sinta mal. Aplique a regra "quando ela some" de
+`_motor/repeticao-espacada.md`.
 
-**Pilha de revisão grande.** Acima de 10 vencidas, diga o número e que você vai pegar as 10
-mais urgentes hoje. Fila enorme sem aviso faz a pessoa desistir; fila enorme com plano, não.
+**Mais de 10 revisões vencidas.** Nunca despeje a fila. Diga o número, diga que você vai pegar
+as 10 que mais importam, e siga.
 
-**Dúvida aberta da sessão passada.** Se `duvidas.md` tem pergunta sem resposta, retome ela
-antes de qualquer conteúdo novo. Dúvida que some é confiança que some junto.
+**Dúvida aberta da sessão passada.** Retome antes de qualquer conteúdo novo, citando a pergunta
+dela com as palavras dela. É o gesto mais forte de "eu lembrei de você" que o sistema tem.
 
 ## O que não fazer
 
-Não repita o onboarding. Ela já foi apresentada ao sistema.
+Não repita o que ela já sabe sobre o sistema. Ela não é nova aqui.
 
-Não liste arquivos, pastas nem quantos módulos existem. Ela quer o próximo passo, não o
-inventário.
+Não liste arquivos, pastas, módulos ou quantos conceitos existem em cada um.
 
-Não termine com "o que você quer fazer?" quando a resposta é óbvia. Se vencem 3 revisões, o que
-ela quer fazer é revisar. Comece.
+Não termine com "o que você quer fazer?" quando você já sabe a resposta. Se vencem três
+revisões, o que ela quer fazer é revisar. Proponha e comece.

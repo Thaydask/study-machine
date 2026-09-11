@@ -5,6 +5,10 @@ description: Porta de entrada da máquina de estudos. Começa um assunto novo (d
 
 # estudar
 
+Leia `_motor/voz.md` antes. Montar a trilha é o momento em que o sistema mais parece uma
+ferramenta gerando pastas, e é justamente onde ela precisa sentir que alguém está planejando
+com ela.
+
 Duas situações, e você decide qual é olhando a pasta `STUDY/` antes de responder qualquer coisa.
 
 ## Situação A: retomar

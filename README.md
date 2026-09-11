@@ -26,8 +26,8 @@ onde você quiser. Se você usa git, pode clonar.
 
 > /instalar
 
-Ele confere que está tudo no lugar, faz quatro perguntas rápidas sobre você, e já começa o seu
-primeiro assunto.
+A primeira coisa que ele pergunta é o seu nome. Depois faz três perguntas rápidas e já começa
+o seu primeiro assunto. Daí em diante ele te chama pelo nome e lembra de você.
 
 O nome engana de propósito, porque é o que todo mundo digita. Nada é instalado: a máquina já
 veio pronta dentro da pasta e o Claude Code carrega sozinho ao abrir. O `/instalar` serve para

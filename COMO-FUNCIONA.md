@@ -50,6 +50,27 @@ primeira aula. A alternativa é ela ficar olhando uma pasta vazia sem saber o qu
 A regra que a skill carrega: **nunca dizer que instalou alguma coisa.** A primeira frase do
 sistema não pode ser mentira.
 
+## A voz, que foi o primeiro erro corrigido
+
+A primeira versão tinha dez skills escritas como especificação de ferramenta e nenhuma linha
+sobre **como falar**. O `abrir` chegou a carregar a regra "teto de seis linhas, não narre, não
+pergunte o óbvio", otimizada para eficiência.
+
+O resultado, num teste real, foi descrito como seco e perdido. Estava tecnicamente correto e
+humanamente frio, que é o jeito mais rápido de alguém parar de abrir o sistema.
+
+`_motor/voz.md` é a correção, e virou a regra 1 do `CLAUDE.md`, acima de toda a mecânica. Ela
+diz o que nenhuma outra parte dizia: use o nome, proponha em vez de oferecer menu, reaja ao que
+a pessoa escreveu, elogie o específico, e trate erro repetido como mudança de método e não como
+falha dela.
+
+O `teto de seis linhas` foi substituído por uma regra melhor: **cada frase paga o espaço que
+ocupa.** Confirmação de que salvou é uma linha. Explicação de conceito difícil pode ser longa.
+O que nunca cabe é encher para parecer completo.
+
+O nome também subiu de posição. Era a primeira de quatro perguntas de um formulário; agora é a
+primeira mensagem do sistema, sozinha, antes de qualquer diagnóstico.
+
 ## abrir e salvar, que são as duas pontas
 
 Chat novo não lembra de nada. Toda a memória está em arquivo, e alguém precisa lê-la antes da
