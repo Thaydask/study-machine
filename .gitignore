@@ -1,0 +1,17 @@
+# Lixo de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Editor
+.vscode/
+.idea/
+
+# Permissões locais da pessoa, que não são dela para compartilhar
+.claude/settings.local.json
+
+# O estudo em si NÃO é ignorado, de propósito.
+# STUDY/ versiona junto, porque o histórico do conhecimento é o ponto do projeto.
+# Se você não quiser que o seu estudo vá para um repositório público, descomente:
+# STUDY/
