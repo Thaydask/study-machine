@@ -1,16 +1,25 @@
 ---
 name: salvar
-description: Guarda o estudo no git, com mensagem de commit que descreve a evolução do conhecimento. Configura o repositório na primeira vez. Use quando a pessoa disser "salvar", "guarda isso", "commit", "backup", ou ao fim de uma sessão longa.
+description: Fecha a sessão de estudo. Atualiza grafo, painel e registro, e guarda no git com uma mensagem que descreve a evolução do conhecimento. Configura o repositório na primeira vez. Use quando a pessoa disser "salvar", "terminei", "por hoje é só", "vou trocar de assunto", ou ao fim de qualquer sessão.
 ---
 
 # salvar
 
+É o par de `abrir`. Esta fecha a sessão, aquela abre a seguinte.
+
 Git aqui é histórico do conhecimento, não burocracia. Cada commit é um passo do aprendizado, e
 dá para voltar e ver como o entendimento mudou.
 
-## Antes
+## Antes de qualquer git
 
-Confira que `progresso` já rodou. Salvar com o grafo desatualizado congela um estado errado.
+**Carregue `progresso` e deixe rodar.** Ele atualiza o grafo, escreve o registro da sessão,
+reescreve o dashboard e regenera o `dados.js` do painel.
+
+Salvar com o grafo desatualizado é pior que não salvar: congela um estado errado e a próxima
+abertura acredita nele.
+
+Se ela disse **"vou trocar de assunto"**, o fechamento é o mesmo. Feche este antes de abrir o
+outro, senão o que aconteceu hoje se perde.
 
 ## Se o git não estiver configurado
 

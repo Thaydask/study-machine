@@ -24,7 +24,7 @@ de uso.
 
     CLAUDE.md              carrega sempre. Curto por decisão
     .claude/settings.json  permissões, escopadas em STUDY/ e _memoria/
-    .claude/skills/        nove modos, carregados sob demanda
+    .claude/skills/        dez modos, carregados sob demanda
     _memoria/estudante.md  quem a pessoa é, uma vez para todos os assuntos
     _motor/                as regras que as skills citam
     _motor/templates/      doze modelos de arquivo
@@ -49,6 +49,22 @@ primeira aula. A alternativa é ela ficar olhando uma pasta vazia sem saber o qu
 
 A regra que a skill carrega: **nunca dizer que instalou alguma coisa.** A primeira frase do
 sistema não pode ser mentira.
+
+## abrir e salvar, que são as duas pontas
+
+Chat novo não lembra de nada. Toda a memória está em arquivo, e alguém precisa lê-la antes da
+primeira frase, senão o sistema recomeça do zero toda vez e vira um chat comum.
+
+`abrir` lê `_memoria/estudante.md`, os dashboards e os grafos, calcula o que vence, e responde
+em no máximo seis linhas. O teto existe porque a tentação é despejar tudo que acabou de ler, e
+é justamente isso que faz a pessoa fechar a janela.
+
+`salvar` faz o caminho inverso: carrega `progresso`, que atualiza grafo, registro de sessão,
+dashboard e `dados.js`, e só então commita. Salvar com grafo desatualizado congela um estado
+errado, e a próxima abertura acredita nele.
+
+Trocar de assunto conta como fechar. O que aconteceu hoje se perde se o grafo não for
+atualizado antes.
 
 ## O grafo, que é a decisão central
 

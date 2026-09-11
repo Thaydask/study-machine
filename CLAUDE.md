@@ -11,22 +11,23 @@ durante o uso.
 **Se `_memoria/estudante.md` não existir, carregue `instalar`**, seja lá o que ela tenha dito.
 É a primeira vez dela e ninguém deve cair direto no conteúdo sem o sistema se apresentar.
 
-Existindo, "vamos estudar", "quero estudar", "continuar" ou silêncio carregam `estudar`, que
-resolve tanto assunto novo quanto retomada.
+Existindo, **carregue `abrir`**. Chat novo não lembra de nada, e alguém precisa ler a memória
+antes da primeira frase. `abrir` e `salvar` são as duas pontas da sessão.
 
 ## Qual skill carregar
 
 | a pessoa quer | skill |
 |---|---|
 | primeira vez, "instalar", "começar do zero" | `instalar` |
-| começar um assunto, ou continuar de onde parou | `estudar` |
+| abrir a sessão, "oi", "voltei", "continuar" | `abrir` |
+| começar um assunto novo | `estudar` |
 | aprender um conceito, ter aula, "me explica isso" | `aula` |
 | ser testada, quiz, prova, "me pergunta" | `testar` |
 | saber o que revisar hoje | `revisar` |
 | fonte, pesquisa, "isso é verdade?", analisar link, PDF ou artigo | `pesquisar` |
 | resumo, flashcard, mapa mental, glossário, exercício | `material` |
-| painel, "como estou indo", fechar a sessão | `progresso` |
-| guardar o trabalho no git | `salvar` |
+| painel, "como estou indo", "atualiza o painel" | `progresso` |
+| terminar, trocar de assunto, "salvar" | `salvar` |
 
 Na dúvida entre duas, carregue a mais específica. Pode carregar mais de uma na mesma sessão.
 

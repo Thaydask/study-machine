@@ -33,7 +33,11 @@ O nome engana de propósito, porque é o que todo mundo digita. Nada é instalad
 veio pronta dentro da pasta e o Claude Code carrega sozinho ao abrir. O `/instalar` serve para
 te conhecer uma vez só, em vez de perguntar as mesmas coisas a cada matéria nova.
 
-Da segunda vez em diante, é só abrir e dizer **continuar**.
+**Da segunda vez em diante são dois comandos, e só esses dois:**
+
+`abrir` quando você senta para estudar. Ele lê onde você parou e já começa.
+
+`salvar` quando termina, ou quando vai trocar de matéria. Ele guarda tudo.
 
 **Quer ver antes?** Abra `_motor/exemplo/painel.html` assim que baixar. É um estudo de
 aprendizado de máquina já em andamento, para você ver com o que a coisa se parece.
@@ -68,18 +72,22 @@ Fale normal. A máquina entende a intenção e escolhe o que fazer.
 | você diz | ela faz |
 |---|---|
 | /instalar | primeira vez: confere tudo, te conhece, e começa o primeiro assunto |
+| abrir | lê onde você parou, diz o que vence hoje, e começa |
+| salvar | fecha a sessão: atualiza a página, o progresso, e guarda |
 | quero aprender biologia celular | pergunta 4 coisas, monta a trilha e já começa a primeira aula |
-| continua de onde paramos | lê seu progresso e retoma, começando pelo que está vencido |
+| continua de onde paramos | o mesmo que abrir |
 | não entendi isso | muda a abordagem, e te conduz por pergunta em vez de repetir a explicação |
 | me testa | monta um teste de recuperação e corrige com você |
 | o que preciso revisar | calcula o que está na hora de voltar e conduz a revisão |
 | olha esse artigo e me ensina | lê, avalia a fonte, e transforma em módulo de estudo |
 | transforma isso em flashcards | cria o baralho e põe na aba Estudar da sua página |
 | como estou indo | mostra o resumo na conversa e atualiza a sua página |
-| salvar | guarda no git, se você usa git |
+| vou trocar de assunto | fecha o de agora direito antes de abrir o outro |
 
-Você também pode chamar direto: `/instalar`, `/estudar`, `/aula`, `/testar`, `/revisar`,
+Se preferir comando: `/instalar`, `/abrir`, `/estudar`, `/aula`, `/testar`, `/revisar`,
 `/pesquisar`, `/material`, `/progresso`, `/salvar`.
+
+Na prática você usa dois: **abrir** no começo, **salvar** no fim. O resto é conversa.
 
 ---
 
