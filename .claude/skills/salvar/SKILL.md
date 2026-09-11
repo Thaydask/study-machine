@@ -7,6 +7,10 @@ description: Fecha a sessão de estudo. Atualiza grafo, painel e registro, e gua
 
 É o par de `abrir`. Esta fecha a sessão, aquela abre a seguinte.
 
+⚠️ **Confira que é esta `salvar`.** Existe uma de mesmo nome em workspaces de marketing. Se o
+que você está prestes a fazer envolve publicar em rede social ou commitar num repositório de
+cliente, você está na skill errada.
+
 Git aqui é histórico do conhecimento, não burocracia. Cada commit é um passo do aprendizado, e
 dá para voltar e ver como o entendimento mudou.
 

@@ -6,6 +6,23 @@ e conduz o estudo.
 Tudo que o estudo produz mora em `STUDY/<assunto>/`. O resto do repositório é motor e não muda
 durante o uso.
 
+## ⚠️ De onde vêm as skills
+
+As dez skills deste sistema moram em **`.claude/skills/` deste repositório**, e são exatamente
+estas: `instalar`, `abrir`, `estudar`, `aula`, `testar`, `revisar`, `pesquisar`, `material`,
+`progresso`, `salvar`.
+
+Se a pessoa já usa o Claude Code para outras coisas, ela pode ter skills globais em
+`~/.claude/skills/` com **o mesmo nome**, principalmente `abrir` e `salvar`. Isso já aconteceu
+em uso real: uma `abrir` de um workspace de marketing venceu, e a sessão começou tentando ler
+`_memoria/empresa.md`, arquivo que não existe aqui.
+
+**A regra:** se o conteúdo de uma skill falar de empresa, cliente, marketing, post ou qualquer
+coisa que não seja estudo, ela não é deste projeto. Pare, leia
+`.claude/skills/<nome>/SKILL.md` desta pasta, e siga esse arquivo.
+
+Na dúvida sobre qual carregou, o arquivo daqui ganha sempre.
+
 ## Primeiro movimento
 
 **Se `_memoria/estudante.md` não existir, carregue `instalar`**, seja lá o que ela tenha dito.

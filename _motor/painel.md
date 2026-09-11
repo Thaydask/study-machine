@@ -57,13 +57,35 @@ Regras do conteúdo:
 
 ## O que a página faz
 
+Barra lateral fixa com a marca, o assunto, o objetivo, e o progresso em porcentagem com a
+contagem por domínio. Barra de busca no topo, com `Ctrl K`.
+
 | aba | mostra |
 |---|---|
-| Hoje | o que vence hoje, o próximo conteúdo liberado, os 3 mais fracos, a última sessão |
-| Trilha | todos os conceitos por módulo, com cor de domínio e aviso de lacuna |
-| Estudar | flashcards com virar, acertei e errei |
-| Material | as aulas escritas, legíveis na página |
-| Fontes | verificadas e não verificadas, separadas |
+| Hoje | um cartão de proposta do dia, quatro contadores, a fila de revisão, o que está liberado, o que está fraco e a última sessão |
+| Trilha | os conceitos por módulo, com cor de domínio, aviso de lacuna e marcação de viga |
+| Estudar | flashcards com virar, acertei e errei, atalhos de teclado e barra de avanço |
+| Material | as aulas em cartão com ícone, e leitura em coluna de 66 caracteres |
+| Fontes | verificadas e não verificadas, com selo de nível |
+
+**A busca** procura em conceito, aula, fonte e flashcard ao mesmo tempo, e destaca o trecho.
+`Ctrl K` foca, `Esc` limpa.
+
+**Atalhos na aba Estudar:** espaço vira a carta, `1` ou `e` marca errei, `2` ou `a` marca
+acertei.
+
+### Os estados vazios importam mais que os cheios
+
+No começo tudo está ⚪, sem flashcard e sem aula. A página foi desenhada para esse estado, não
+apesar dele:
+
+- o cartão do dia propõe o primeiro conceito liberado, com o comando pronto para copiar
+- cada aba vazia diz o que pedir ao Claude para preenchê-la
+- quando nenhum conceito foi medido ainda, aparece um bloco explicando que cinza não quer dizer
+  que ela não sabe, quer dizer que o sistema não tem prova
+
+Nunca troque esses textos por "nenhum dado disponível". O estado vazio é a primeira coisa que
+ela vê, e é onde a maioria dos sistemas parece quebrada.
 
 ## O ciclo de volta, que é a parte que engana
 

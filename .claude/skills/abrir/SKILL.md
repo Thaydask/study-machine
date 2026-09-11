@@ -10,6 +10,11 @@ O par de `salvar`. Uma fecha a sessão, esta abre a seguinte.
 O problema que resolve: chat novo não lembra de nada. Toda a memória está em arquivo, e alguém
 precisa lê-la antes da primeira frase.
 
+⚠️ **Confira que é esta `abrir`.** Existe uma skill de mesmo nome em workspaces de marketing, e
+ela já venceu esta em uso real. Se você se pegar procurando `_memoria/empresa.md`,
+`_memoria/preferencias.md` ou `_memoria/estrategia.md`, você está na skill errada: aqui os
+arquivos são `_memoria/estudante.md` e `STUDY/`.
+
 **Leia `_motor/voz.md` antes de escrever qualquer coisa.** Esta é a primeira mensagem que ela
 lê no dia, e é aqui que o sistema parece um assistente ou parece um terminal.
 
