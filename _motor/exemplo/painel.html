@@ -48,9 +48,9 @@ aside{background:var(--bg2);border-right:1px solid var(--linha);
   display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
 main{min-width:0;display:flex;flex-direction:column}
 .topo{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--linha);
-  padding:14px 30px;display:flex;align-items:center;gap:16px}
-.palco{padding:28px 30px 80px;max-width:1080px;width:100%}
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--linha);padding:14px 34px}
+.palco{padding:28px 34px 80px;width:100%;max-width:1380px;margin:0 auto}
+.topoin{display:flex;align-items:center;gap:16px;width:100%;max-width:1380px;margin:0 auto}
 
 /* ---------- barra lateral ---------- */
 .marca{display:flex;align-items:center;gap:10px;padding:20px 20px 18px;
@@ -205,7 +205,13 @@ h3{font-size:15.5px;margin:0 0 4px;letter-spacing:-.01em;font-weight:620}
 .item .ic{width:34px;height:34px;border-radius:9px;background:var(--acfr);color:var(--ac);
   display:flex;align-items:center;justify-content:center;flex:none}
 .item b{display:block;font-size:14px;font-weight:620;line-height:1.35;margin-bottom:2px}
-.leitura{max-width:66ch;font-size:15.5px;line-height:1.72}
+/* leitura: a coluna estreita é o CARTÃO, não o texto dentro de um cartão largo.
+   Cartão largo com texto estreito é o que deixa metade da tela vazia. */
+.card.leitor{max-width:820px;margin:0 auto 12px;padding:34px 44px}
+.leitura{font-size:15.5px;line-height:1.72}
+.leitura hr{border:0;border-top:1px solid var(--linha);margin:26px 0}
+.leitura ol{margin:0 0 14px;padding-left:22px}
+.leitura em{font-style:italic;color:var(--tx2)}
 .leitura h4{font-size:16px;margin:26px 0 8px;font-weight:640;letter-spacing:-.01em}
 .leitura h4:first-child{margin-top:0}
 .leitura p{margin:0 0 14px}
@@ -230,7 +236,7 @@ h3{font-size:15.5px;margin:0 0 4px;letter-spacing:-.01em;font-weight:620}
 
 /* ---------- mapa mental ---------- */
 .mapa{position:relative;overflow-x:auto;padding:6px 2px 10px}
-.mapa .tela{position:relative}
+.mapa .tela{position:relative;margin:0 auto}
 .mapa svg.fios{position:absolute;inset:0;pointer-events:none;overflow:visible}
 .mapa .fio{fill:none;stroke:var(--linha2);stroke-width:1.5}
 .mapa .fio.v{stroke:var(--verde)} .mapa .fio.a{stroke:var(--amb)}
@@ -313,7 +319,7 @@ mark{background:var(--acfr);color:var(--ac);border-radius:3px;padding:0 2px}
     </div>
   </aside>
   <main>
-    <div class="topo">
+    <div class="topo"><div class="topoin">
       <div class="busca">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -321,7 +327,7 @@ mark{background:var(--acfr);color:var(--ac);border-radius:3px;padding:0 2px}
       </div>
       <span class="kbd">Ctrl K</span>
       <span class="data" id="hoje"></span>
-    </div>
+    </div></div>
     <div class="palco" id="palco"></div>
   </main>
 </div>
@@ -369,24 +375,50 @@ function dependentes(id){ return cs().filter(function(c){ return (c.prereq||[]).
 function dia(d){ if(!d) return ""; var p=String(d).split("-");
   return p.length===3 ? p[2]+"/"+p[1] : d }
 
-/* markdown minimo */
-function md(t){
+/* markdown minimo.
+   O arquivo vem com quebra dura de linha em ~95 colunas. Parágrafo é separado por linha
+   EM BRANCO, nunca por quebra de linha: sem isso cada linha vira um <p> e o negrito que
+   atravessa a quebra aparece como ** na tela. */
+function md(t,semTitulo){
   if(!t) return "";
-  var L=String(t).split("\n"), out=[], lista=false;
+  var L=String(t).replace(/\r/g,"").split("\n"), out=[], buf=[], lista=null, primeiro=true;
+  /* o rótulo de evidência vem PRIMEIRO, e come as crases em volta se houver.
+     Se `código` rodasse antes, `[estabelecido]` sairia como <code> com um <span> dentro. */
   function inl(s){ return esc(s)
-    .replace(/`([^`]+)`/g,"<code>$1</code>")
-    .replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
+    .replace(/`?\[(estabelecido|evidência forte|evidência limitada|hipótese|interpretação|opinião|controverso|desatualizado)\]`?/g,'<span class="ev">$1</span>')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
-    .replace(/\[(estabelecido|evidência forte|evidência limitada|hipótese|interpretação|opinião|controverso|desatualizado)\]/g,'<span class="ev">$1</span>') }
-  for(var k=0;k<L.length;k++){
-    var l=L[k], li=l.match(/^\s*[-*]\s+(.*)/);
-    if(li){ if(!lista){out.push("<ul>");lista=true} out.push("<li>"+inl(li[1])+"</li>"); continue }
-    if(lista){ out.push("</ul>"); lista=false }
-    if(!l.trim()) continue;
-    var h=l.match(/^#{1,6}\s+(.*)/);
-    out.push(h ? "<h4>"+inl(h[1])+"</h4>" : "<p>"+inl(l)+"</p>");
+    .replace(/`([^`]+)`/g,"<code>$1</code>")
+    .replace(/\*\*([^*]+?)\*\*/g,"<strong>$1</strong>")
+    .replace(/(^|[\s(])\*([^*\n]+?)\*(?=[\s).,;:!?]|$)/g,"$1<em>$2</em>") }
+  function fecha(){
+    if(buf.length){ out.push("<p>"+inl(buf.join(" "))+"</p>"); buf=[] }
+    if(lista){ out.push(lista==="ol"?"</ol>":"</ul>"); lista=null }
   }
-  if(lista) out.push("</ul>");
+  for(var k=0;k<L.length;k++){
+    var l=L[k], t2=l.trim();
+    if(!t2){ fecha(); continue }
+    if(/^(-{3,}|\*{3,}|_{3,})$/.test(t2)){ fecha(); out.push("<hr>"); continue }
+    var h=t2.match(/^(#{1,6})\s+(.*)/);
+    if(h){
+      fecha();
+      /* a aula às vezes repete o próprio título como primeiro cabeçalho */
+      if(primeiro && semTitulo && slug(h[2])===slug(semTitulo)){ primeiro=false; continue }
+      primeiro=false;
+      out.push("<h4>"+inl(h[2])+"</h4>"); continue;
+    }
+    var ul=t2.match(/^[-*]\s+(.*)/), ol=t2.match(/^\d+[.)]\s+(.*)/);
+    if(ul||ol){
+      if(buf.length){ out.push("<p>"+inl(buf.join(" "))+"</p>"); buf=[] }
+      var tipo=ul?"ul":"ol";
+      if(lista&&lista!==tipo){ out.push(lista==="ol"?"</ol>":"</ul>"); lista=null }
+      if(!lista){ out.push(tipo==="ol"?"<ol>":"<ul>"); lista=tipo }
+      out.push("<li>"+inl((ul||ol)[1])+"</li>"); continue;
+    }
+    if(lista){ out.push(lista==="ol"?"</ol>":"</ul>"); lista=null }
+    primeiro=false;
+    buf.push(t2);
+  }
+  fecha();
   return out.join("");
 }
 function rot(icone,texto){ return '<div class="rot">'+ic(icone,13)+esc(texto)+'</div>' }
@@ -602,11 +634,12 @@ function abrir(k){
   if(!x) return;
   document.getElementById("lista").hidden=true;
   document.getElementById("leitor").innerHTML=
-    '<button class="acao fantasma" onclick="volta()">'+ic("seta",14)+'voltar</button>'+
-    '<div class="card" style="margin-top:14px;padding:26px 30px">'+
+    '<div style="max-width:820px;margin:0 auto 14px">'+
+    '<button class="acao fantasma" onclick="volta()">'+ic("seta",14)+'voltar</button></div>'+
+    '<div class="card leitor">'+
     '<div class="rot">'+ic("livro",13)+esc(x.modulo||"aula")+'</div>'+
-    '<h2 style="font-size:24px;margin-bottom:16px">'+esc(x.titulo)+'</h2>'+
-    '<div class="leitura">'+md(x.conteudo)+'</div></div>';
+    '<h2 style="font-size:25px;margin-bottom:18px">'+esc(x.titulo)+'</h2>'+
+    '<div class="leitura">'+md(x.conteudo,x.titulo)+'</div></div>';
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function volta(){ document.getElementById("lista").hidden=false;
@@ -662,14 +695,17 @@ function flashDe(c){
 /* primeiro parágrafo de verdade da aula, para o resumo do nó */
 function resumoDe(c){
   var k=aulaDe(c); if(k<0) return "";
-  var L=String(aulas()[k].conteudo||"").split("\n");
+  var L=String(aulas()[k].conteudo||"").replace(/\r/g,"").split("\n"), buf=[];
   for(var j=0;j<L.length;j++){
     var l=L[j].trim();
-    if(!l||l.charAt(0)==="#"||l.charAt(0)==="-") continue;
-    l=l.replace(/\*\*/g,"").replace(/`/g,"").replace(/\[[^\]]*\]/g,"");
-    return l.length>190 ? l.slice(0,190).replace(/\s\S*$/,"")+"…" : l;
+    /* o texto vem com quebra dura: junta até a linha em branco, senão sai meia frase */
+    if(!l||/^(#|[-*]\s|\d+[.)]\s|-{3,})/.test(l)){ if(buf.length) break; continue }
+    buf.push(l);
   }
-  return "";
+  if(!buf.length) return "";
+  var p=buf.join(" ").replace(/\*\*/g,"").replace(/`/g,"").replace(/\[[^\]]*\]\([^)]*\)/g,"")
+          .replace(/\[[^\]]*\]/g,"").replace(/\s+/g," ").trim();
+  return p.length>210 ? p.slice(0,210).replace(/\s\S*$/,"")+"…" : p;
 }
 
 function abaMapa(){

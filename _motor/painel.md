@@ -49,8 +49,14 @@ Regras do conteúdo:
 - **conceitos** é a tabela do `grafo.md` convertida, linha por linha, sem inventar e sem omitir
 - **dominio** usa os mesmos símbolos do grafo: 🟢 🟡 🔴 ⚪
 - **prereq** carrega os ids, não os nomes. É deles que sai o aviso de lacuna na aba Trilha
-- **aulas.conteudo** aceita markdown simples: `#` título, `-` lista, `**negrito**`, `` `código` ``
-  e os rótulos de evidência entre colchetes, que a página estiliza sozinha
+- **aulas.conteudo** aceita markdown simples: `#` título, `-` lista, `1.` lista numerada,
+  `---` linha, `**negrito**`, `*itálico*`, `` `código` `` e os rótulos de evidência entre
+  colchetes, que a página estiliza sozinha. Pode mandar o `.md` inteiro, sem resumir
+- **quebra de linha não separa parágrafo, linha em branco separa.** Texto quebrado na coluna 95,
+  como sai de qualquer editor, é remontado num parágrafo só. Isso vale também para negrito que
+  atravessa a quebra
+- se o primeiro cabeçalho da aula repetir o `titulo` dela, a página descarta, para o título não
+  aparecer duas vezes
 - **aulas.conceitos** é opcional e é a lista de ids que aquela aula cobre. É o que liga o nó do
   mapa mental à aula. Sem ele a página tenta casar pelo título e depois pelo módulo, o que
   funciona mas erra quando o título da aula não é o nome do conceito. **Preencha sempre**
