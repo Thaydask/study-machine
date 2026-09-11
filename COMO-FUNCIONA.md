@@ -23,11 +23,32 @@ de uso.
 ## As peças
 
     CLAUDE.md              carrega sempre. Curto por decisão
-    .claude/settings.json  permissões, escopadas em STUDY/
-    .claude/skills/        oito modos, carregados sob demanda
+    .claude/settings.json  permissões, escopadas em STUDY/ e _memoria/
+    .claude/skills/        nove modos, carregados sob demanda
+    _memoria/estudante.md  quem a pessoa é, uma vez para todos os assuntos
     _motor/                as regras que as skills citam
     _motor/templates/      doze modelos de arquivo
     STUDY/                 o estudo. Nasce vazio
+
+## Por que existe um `/instalar` se nada é instalado
+
+Skill de projeto em `.claude/skills/` é carregada pelo Claude Code ao abrir a pasta. Clonar já
+é instalar, então tecnicamente a skill é desnecessária.
+
+Ela existe por três motivos que não são técnicos:
+
+**Prova.** Quem clona um repositório e abre um chat não tem como saber se funcionou. Rodar um
+comando e receber "tudo no lugar" resolve uma dúvida real.
+
+**Perfil global.** `_memoria/estudante.md` guarda nome, tempo por semana e preferência de
+explicação uma vez, para nenhuma matéria nova repetir as mesmas quatro perguntas. Ele também
+acumula o que foi **observado**, que é mais confiável que o que foi declarado.
+
+**Não deixar a pessoa sozinha.** O `/instalar` termina perguntando o assunto e emendando na
+primeira aula. A alternativa é ela ficar olhando uma pasta vazia sem saber o que digitar.
+
+A regra que a skill carrega: **nunca dizer que instalou alguma coisa.** A primeira frase do
+sistema não pode ser mentira.
 
 ## O grafo, que é a decisão central
 

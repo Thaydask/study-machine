@@ -24,10 +24,16 @@ onde você quiser. Se você usa git, pode clonar.
 
 **3. Abra o Claude Code dentro da pasta** e escreva:
 
-> vamos estudar
+> /instalar
 
-Pronto. Não tem instalação, não tem senha, não tem programa para configurar, não tem conta para
-criar.
+Ele confere que está tudo no lugar, faz quatro perguntas rápidas sobre você, e já começa o seu
+primeiro assunto.
+
+Não tem instalação de verdade para fazer: as skills já vêm na pasta e o Claude Code carrega
+sozinho ao abrir. O `/instalar` existe para te conhecer uma vez só, em vez de perguntar as
+mesmas coisas a cada matéria nova.
+
+Da segunda vez em diante, é só abrir e dizer **continuar**.
 
 **Quer ver antes de instalar?** Abra `_motor/exemplo/painel.html` depois de baixar. É um estudo
 de aprendizado de máquina já em andamento, para você ver com o que se parece.
@@ -61,6 +67,7 @@ Fale normal. A máquina entende a intenção e escolhe o que fazer.
 
 | você diz | ela faz |
 |---|---|
+| /instalar | primeira vez: confere tudo, te conhece, e começa o primeiro assunto |
 | quero aprender biologia celular | pergunta 4 coisas, monta a trilha e já começa a primeira aula |
 | continua de onde paramos | lê seu progresso e retoma, começando pelo que está vencido |
 | não entendi isso | muda a abordagem, e te conduz por pergunta em vez de repetir a explicação |
@@ -71,14 +78,17 @@ Fale normal. A máquina entende a intenção e escolhe o que fazer.
 | como estou indo | painel do assunto, com o que está fraco e por quê |
 | salvar | guarda no git, se você usa git |
 
-Você também pode chamar direto: `/estudar`, `/aula`, `/testar`, `/revisar`, `/pesquisar`,
-`/material`, `/progresso`, `/salvar`.
+Você também pode chamar direto: `/instalar`, `/estudar`, `/aula`, `/testar`, `/revisar`,
+`/pesquisar`, `/material`, `/progresso`, `/salvar`.
 
 ---
 
 ## O que aparece na sua pasta
 
 Nada, até você começar. Depois da primeira sessão, algo assim:
+
+    _memoria/
+    └── estudante.md      quem você é. vale para todas as matérias
 
     STUDY/
     └── biologia-celular/

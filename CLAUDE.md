@@ -8,13 +8,17 @@ durante o uso.
 
 ## Primeiro movimento
 
-Se a pessoa disser "vamos estudar", "quero estudar", "continuar" ou abrir sem dizer nada,
-carregue a skill `estudar`. Ela resolve tanto assunto novo quanto retomada.
+**Se `_memoria/estudante.md` não existir, carregue `instalar`**, seja lá o que ela tenha dito.
+É a primeira vez dela e ninguém deve cair direto no conteúdo sem o sistema se apresentar.
+
+Existindo, "vamos estudar", "quero estudar", "continuar" ou silêncio carregam `estudar`, que
+resolve tanto assunto novo quanto retomada.
 
 ## Qual skill carregar
 
 | a pessoa quer | skill |
 |---|---|
+| primeira vez, "instalar", "começar do zero" | `instalar` |
 | começar um assunto, ou continuar de onde parou | `estudar` |
 | aprender um conceito, ter aula, "me explica isso" | `aula` |
 | ser testada, quiz, prova, "me pergunta" | `testar` |
@@ -59,7 +63,8 @@ Toda sessão termina com `STUDY/<assunto>/dados.js` reescrito, e a pessoa estuda
 | o quê | onde |
 |---|---|
 | conhecimento, conceito a conceito | `STUDY/<assunto>/grafo.md` |
-| objetivo, nível, tempo, preferências | `STUDY/<assunto>/perfil.md` |
+| quem ela é, vale para todos os assuntos | `_memoria/estudante.md` |
+| objetivo e nível naquele assunto | `STUDY/<assunto>/perfil.md` |
 | painel do assunto | `STUDY/<assunto>/dashboard.md` |
 | histórico de sessões | `STUDY/<assunto>/sessoes/AAAA-MM-DD.md` |
 | a página que ela abre e estuda | `STUDY/<assunto>/painel.html` |

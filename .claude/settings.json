@@ -6,6 +6,8 @@
       "Grep(**)",
       "Write(STUDY/**)",
       "Edit(STUDY/**)",
+      "Edit(_memoria/**)",
+      "Write(_memoria/**)",
       "WebSearch",
       "WebFetch",
       "Bash(git status:*)",

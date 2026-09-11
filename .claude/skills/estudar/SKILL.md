@@ -34,7 +34,10 @@ Se a última sessão foi há mais de 30 dias, aplique a regra "quando ela some" 
 
 ### 1. Diagnóstico, em uma mensagem só
 
-Pergunte no máximo quatro coisas, juntas, e diga que ela pode pular o que não souber:
+**Leia `_memoria/estudante.md` antes.** Tempo por semana, preferência de explicação e nome já
+estão lá. Perguntar de novo o que o sistema já sabe é o jeito mais rápido de parecer burro.
+
+Pergunte só o que falta, no máximo quatro coisas, juntas, e diga que ela pode pular:
 
 - Por que quer aprender isso, e para quê vai usar
 - O que já sabe do assunto hoje, mesmo que seja nada
