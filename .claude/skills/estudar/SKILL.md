@@ -87,7 +87,18 @@ semana que ela declarou. Sem prometer data que você não pode garantir.
 
 `dashboard.md` a partir de `_motor/templates/dashboard.md`.
 
-### 6. Comece a primeira aula na mesma sessão
+### 6. Crie o painel
+
+Copie o arquivo **literalmente**, com `cp _motor/painel.html STUDY/<assunto>/painel.html`.
+Não reescreva o conteúdo à mão: são quase 400 linhas e qualquer paráfrase quebra a página.
+Depois escreva o
+primeiro `STUDY/<assunto>/dados.js` a partir do grafo que você acabou de montar. Contrato e
+exemplo preenchido em `_motor/painel.md`.
+
+Diga onde ela abre, com o caminho completo. É a primeira coisa concreta que ela vê, e é o que
+faz o sistema não parecer uma pasta de arquivos de texto.
+
+### 7. Comece a primeira aula na mesma sessão
 
 Este é o ponto onde a maioria dos sistemas falha: entregam a estrutura e param. Não pare.
 

@@ -8,6 +8,9 @@ computador, e é seu.
 
 Não é um chatbot que responde pergunta. É um professor particular que guarda o seu histórico.
 
+Você estuda por uma página, não por arquivos de texto. Ela abre com dois cliques, mostra o que
+cai hoje, a trilha inteira com as lacunas marcadas, flashcards para treinar e as aulas para ler.
+
 ---
 
 ## Instalar
@@ -25,6 +28,30 @@ onde você quiser. Se você usa git, pode clonar.
 
 Pronto. Não tem instalação, não tem senha, não tem programa para configurar, não tem conta para
 criar.
+
+**Quer ver antes de instalar?** Abra `_motor/exemplo/painel.html` depois de baixar. É um estudo
+de aprendizado de máquina já em andamento, para você ver com o que se parece.
+
+---
+
+## A página
+
+Depois da primeira sessão existe um `painel.html` dentro da pasta do seu assunto. Dois cliques e
+ele abre no navegador. Sem servidor, sem internet, sem instalar nada.
+
+| aba | o que tem |
+|---|---|
+| **Hoje** | o que vence, o próximo conteúdo liberado, seus 3 conceitos mais fracos |
+| **Trilha** | tudo que você vai aprender, por cor, com as lacunas apontadas |
+| **Estudar** | flashcards: vira, acertei, errei |
+| **Material** | as aulas escritas, para ler na página |
+| **Fontes** | o que foi conferido, e o que ainda não foi |
+
+Uma coisa para saber: a página **mostra**, não escreve. Quando você termina um baralho de
+flashcards, ela monta uma frase com o resultado e um botão de copiar. Você cola no Claude e aí o
+seu progresso anda. É um passo a mais, e é o preço de não precisar de servidor nenhum.
+
+Peça "atualiza o painel" sempre que quiser, e no fim de cada sessão ele se atualiza sozinho.
 
 ---
 
@@ -55,7 +82,9 @@ Nada, até você começar. Depois da primeira sessão, algo assim:
 
     STUDY/
     └── biologia-celular/
-        ├── dashboard.md      seu painel
+        ├── painel.html       ABRA ESTE. é por onde você estuda
+        ├── dados.js          o que a página mostra
+        ├── dashboard.md      a mesma coisa em texto, para o git
         ├── grafo.md          o que você sabe, conceito a conceito
         ├── perfil.md         seu objetivo, seu tempo, como você aprende
         ├── plano.md          a trilha

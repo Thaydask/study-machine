@@ -16,6 +16,8 @@ Ordem, e a ordem importa:
    recorrente e datas atualizados. Se isso não estiver feito, o resto vai ficar errado.
 2. **Registro da sessão** em `STUDY/<assunto>/sessoes/AAAA-MM-DD.md`, pelo template.
 3. **Dashboard reescrito**, a partir do grafo, nunca de memória.
+4. **`dados.js` reescrito**, também a partir do grafo. Sem esse passo a pessoa abre o painel e
+   vê a sessão passada, que é pior que não ter painel. Contrato em `_motor/painel.md`.
 
 ## O fechamento falado
 
@@ -34,6 +36,16 @@ Três perguntas, respondidas por você, curtas:
 
 Sem elogio genérico. "Ótimo trabalho hoje" não informa nada. "Você explicou validação cruzada
 sem ajuda, o que não tinha acontecido antes" informa.
+
+## O painel
+
+`dashboard.md` é para o git e para você. `painel.html` é para ela.
+
+Os dois saem do mesmo grafo e nunca discordam. Se `STUDY/<assunto>/painel.html` não existir
+ainda, copie de `_motor/painel.html` agora.
+
+Quando ela colar um resultado de flashcard vindo da página, trate como teste: atualize domínio,
+acertos, confiança e datas dos conceitos citados, e regenere `dados.js`.
 
 ## O dashboard
 

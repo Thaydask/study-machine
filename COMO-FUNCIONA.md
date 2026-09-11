@@ -79,6 +79,24 @@ O escopo é apertado de propósito. O sistema não tem permissão de escrever no
 de rodar comando arbitrário. `git commit` é liberado porque é local e reversível. `git push` não
 é, porque é a única ação que tira dado do computador dela.
 
+## O painel, e por que ele é um arquivo `.js` e não `.json`
+
+Markdown é a verdade porque o modelo lê e escreve bem, e o git versiona. Mas markdown não é
+lugar de estudar. Então existe uma camada por cima: `painel.html` mais `dados.js`, dentro da
+pasta de cada assunto.
+
+A página é uma cópia estável que ninguém edita. Os dados são reescritos a cada sessão, a partir
+do grafo. Separar os dois foi decisão de confiabilidade: regerar um arquivo de dados é uma
+tarefa que o modelo faz certo sempre, regerar uma página inteira não.
+
+Os dados são `.js` com `window.DADOS = {...}`, carregado por `<script src>`. Não é `.json` lido
+por `fetch` porque `fetch` sobre `file://` é bloqueado por CORS em todo navegador moderno, e a
+página abriria vazia. `<script src>` funciona. Foi isso que permitiu zero servidor.
+
+O que a página não faz é escrever. Resultado de flashcard sai como texto com botão de copiar, e
+a pessoa cola no Claude. É um passo manual declarado na própria tela. A alternativa seria um
+servidor local, o que mataria a instalação de três passos.
+
 ## Zero dependência
 
 Sem Python, sem Node, sem chave de API, sem banco. Só markdown e o Claude Code.

@@ -26,7 +26,7 @@ carregue a skill `estudar`. Ela resolve tanto assunto novo quanto retomada.
 
 Na dúvida entre duas, carregue a mais específica. Pode carregar mais de uma na mesma sessão.
 
-## As seis regras que não mudam
+## As sete regras que não mudam
 
 **1. Aja, não pergunte.** Criar pasta, escrever arquivo, montar plano, pesquisar e atualizar o
 grafo são ações seguras. Faça, e diga o que fez. Pergunte antes só de apagar, de sobrescrever
@@ -47,7 +47,11 @@ pastas vazias não são organização, são casca.
 explicar com as palavras dela, responder, resolver, comparar, ensinar de volta. Ler não move o
 grafo.
 
-**6. Incerteza é informação.** Marque o nível de evidência do que você afirma
+**6. O painel é a cara do sistema.** Markdown é a verdade, mas ninguém estuda lendo `.md`.
+Toda sessão termina com `STUDY/<assunto>/dados.js` reescrito, e a pessoa estuda pelo
+`painel.html`. Regras em `_motor/painel.md`.
+
+**7. Incerteza é informação.** Marque o nível de evidência do que você afirma
 (`_motor/niveis-de-evidencia.md`). "Não sei" é resposta válida, e melhor que uma plausível.
 
 ## Onde mora o estado
@@ -58,6 +62,8 @@ grafo.
 | objetivo, nível, tempo, preferências | `STUDY/<assunto>/perfil.md` |
 | painel do assunto | `STUDY/<assunto>/dashboard.md` |
 | histórico de sessões | `STUDY/<assunto>/sessoes/AAAA-MM-DD.md` |
+| a página que ela abre e estuda | `STUDY/<assunto>/painel.html` |
+| os dados que a página lê | `STUDY/<assunto>/dados.js` |
 
 Antes de qualquer coisa num assunto que já existe, leia `dashboard.md` e `grafo.md`. Eles
 substituem a memória da conversa anterior.

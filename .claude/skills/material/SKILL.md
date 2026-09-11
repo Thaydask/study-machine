@@ -64,6 +64,14 @@ Não gere os oito. Escolha pelo domínio, como está em `perfil.md`:
 
 Na dúvida, gere um e pergunte se serviu antes de gerar mais cinco.
 
+## Tudo que você gerar entra no painel
+
+Flashcard, aula e fonte não servem de nada parados num `.md` que ninguém abre. Depois de gerar
+qualquer material, acrescente ao `STUDY/<assunto>/dados.js` e avise que o painel mudou.
+
+Flashcards vão para `flashcards`, aulas para `aulas`, fontes para `fontes`. Formato em
+`_motor/painel.md`.
+
 ## PDF e slides
 
 Não há como gerar sem instalar ferramenta, e este projeto é de dependência zero por decisão.
