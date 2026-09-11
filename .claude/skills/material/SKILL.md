@@ -72,6 +72,13 @@ qualquer material, acrescente ao `STUDY/<assunto>/dados.js` e avise que o painel
 Flashcards vão para `flashcards`, aulas para `aulas`, fontes para `fontes`. Formato em
 `_motor/painel.md`.
 
+⚠️ **Toda aula que entrar no `dados.js` leva o campo `conceitos`**, com os ids que ela cobre.
+É esse campo que liga o nó do mapa mental à aula. Sem ele o mapa tenta adivinhar pelo título, e
+erra sempre que o título da aula não for exatamente o nome do conceito.
+
+Em `flashcards`, o campo `conceito` deve bater com o **nome** do conceito no grafo, pelo mesmo
+motivo: é por ele que o mapa filtra o baralho.
+
 ## PDF e slides
 
 Não há como gerar sem instalar ferramenta, e este projeto é de dependência zero por decisão.

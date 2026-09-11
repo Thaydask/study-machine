@@ -52,6 +52,7 @@ ele abre no navegador. Sem servidor, sem internet, sem instalar nada.
 | aba | o que tem |
 |---|---|
 | **Hoje** | o que vence, o próximo conteúdo liberado, seus 3 conceitos mais fracos |
+| **Mapa mental** | a matéria inteira desenhada. clique num tópico e ele te leva ao material dele |
 | **Trilha** | tudo que você vai aprender, por cor, com as lacunas apontadas |
 | **Estudar** | flashcards: vira, acertei, errei |
 | **Material** | as aulas escritas, para ler na página |

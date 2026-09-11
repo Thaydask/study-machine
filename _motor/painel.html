@@ -228,6 +228,43 @@ h3{font-size:15.5px;margin:0 0 4px;letter-spacing:-.01em;font-weight:620}
   border-radius:99px;white-space:nowrap}
 .niv.b{background:var(--sup2);color:var(--tx2)}
 
+/* ---------- mapa mental ---------- */
+.mapa{position:relative;overflow-x:auto;padding:6px 2px 10px}
+.mapa .tela{position:relative}
+.mapa svg.fios{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.mapa .fio{fill:none;stroke:var(--linha2);stroke-width:1.5}
+.mapa .fio.v{stroke:var(--verde)} .mapa .fio.a{stroke:var(--amb)}
+.mapa .fio.r{stroke:var(--verm)}
+.no{position:absolute;transform:translateY(-50%);border-radius:var(--r2);
+  border:1px solid var(--linha);background:var(--sup);padding:9px 13px;cursor:pointer;
+  text-align:left;line-height:1.3;box-shadow:var(--sombra);transition:border-color .12s,transform .12s}
+.no:hover{border-color:var(--tx3);transform:translateY(-50%) translateX(2px)}
+.no b{display:block;font-size:13px;font-weight:600;letter-spacing:-.005em}
+.no .s{font-size:11px;color:var(--tx2)}
+.no.raiz{background:linear-gradient(135deg,var(--acfr),var(--sup));border-color:var(--ac2);
+  cursor:default}
+.no.raiz:hover{transform:translateY(-50%)}
+.no.raiz b{font-size:14.5px}
+.no.mod{background:var(--sup2);border-color:var(--linha2)}
+.no.mod .cnt{font-size:11px;color:var(--tx3);margin-left:6px}
+.no.cnc{border-left:3px solid var(--cinza)}
+.no.cnc.d3{border-left-color:var(--verde)} .no.cnc.d2{border-left-color:var(--amb)}
+.no.cnc.d1{border-left-color:var(--verm)}
+.no.sel{border-color:var(--ac);box-shadow:0 0 0 3px var(--acfr),var(--sombra)}
+.no .mat{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;color:var(--ac);
+  margin-top:3px}
+.det{position:sticky;bottom:0;margin-top:14px}
+.det .card{margin-bottom:0;border-color:var(--ac2)}
+.det .lig{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.det .lig button{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;
+  border-radius:var(--r2);border:1px solid var(--linha2);background:var(--sup2);cursor:pointer;
+  font-size:13px;font-weight:600}
+.det .lig button:hover{border-color:var(--ac2);color:var(--ac)}
+.det .fechar{background:none;border:0;color:var(--tx3);cursor:pointer;padding:4px;display:flex}
+.det .fechar:hover{color:var(--tx)}
+.legenda{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--tx2);margin-bottom:12px}
+.legenda span{display:flex;align-items:center;gap:6px}
+
 /* busca: resultados */
 .res{margin-bottom:9px}
 .res .tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);
@@ -311,7 +348,9 @@ var IC = {
   copia:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/>',
   vazio:'<circle cx="12" cy="12" r="9"/><path d="M8.5 13.5s1.2 1.5 3.5 1.5 3.5-1.5 3.5-1.5M9 9.5v.01M15 9.5v.01"/>',
   livro:'<path d="M4 5.5A2 2 0 0 1 6 4h12a1 1 0 0 1 1 1v13H6.5A2.5 2.5 0 0 0 4 20.5v-15Z"/><path d="M6.5 18H19v2.5H6.5A2.5 2.5 0 0 1 4 18"/>',
-  fogo:'<path d="M12 3s5 4 5 8a5 5 0 0 1-10 0c0-1.2.5-2.2 1-3 .3 1 1 1.8 2 2 0-2.6 1-5.4 2-7Z"/>'
+  fogo:'<path d="M12 3s5 4 5 8a5 5 0 0 1-10 0c0-1.2.5-2.2 1-3 .3 1 1 1.8 2 2 0-2.6 1-5.4 2-7Z"/>',
+  mapa:'<circle cx="5" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="12" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M7.4 12h3a1.6 1.6 0 0 0 1.4-.8l1.4-2.4a1.6 1.6 0 0 1 1.4-.8h1M7.4 12h8.2M7.4 12h3a1.6 1.6 0 0 1 1.4.8l1.4 2.4a1.6 1.6 0 0 0 1.4.8h1"/>',
+  lupa:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'
 };
 function ic(n,s){ s=s||16; return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none"'+
   ' stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+IC[n]+'</svg>' }
@@ -493,12 +532,24 @@ function abaTrilha(){
 }
 
 /* ---------- ESTUDAR ---------- */
-var bar=[], i=0, virada=false, placar={ok:[],nao:[]};
+var bar=[], i=0, virada=false, placar={ok:[],nao:[]}, filtroFlash=null;
 function abaEstudar(){
-  bar=((D&&D.flashcards)||[]).slice(); i=0; virada=false; placar={ok:[],nao:[]};
+  var todas=((D&&D.flashcards)||[]).slice(), aviso="";
+  if(filtroFlash){
+    var c=acha(filtroFlash);
+    if(c){ var f=flashDe(c);
+      if(f.length){ todas=f; aviso='<div class="card calma" style="margin-bottom:12px">'+
+        '<div class="entre"><span class="meta">Só as cartas de <b style="color:var(--tx)">'+
+        esc(c.nome)+'</b></span>'+
+        '<button class="fechar" style="background:none;border:0;color:var(--ac);cursor:pointer;'+
+        'font:inherit;font-size:13px;font-weight:600" onclick="filtroFlash=null;ir(\'estudar\')">'+
+        'ver o baralho todo</button></div></div>' } }
+    filtroFlash=null;
+  }
+  bar=todas; i=0; virada=false; placar={ok:[],nao:[]};
   if(!bar.length) return vazio("vazio","Nenhum flashcard ainda.",
     'Peça ao Claude: "transforma esse módulo em flashcards". Eles aparecem aqui.');
-  return '<div class="baralho" id="zona"></div>';
+  return aviso+'<div class="baralho" id="zona"></div>';
 }
 function carta(){
   var z=document.getElementById("zona"); if(!z) return;
@@ -548,6 +599,7 @@ function abaMaterial(){
 }
 function abrir(k){
   var x=((D&&D.aulas)||[])[k];
+  if(!x) return;
   document.getElementById("lista").hidden=true;
   document.getElementById("leitor").innerHTML=
     '<button class="acao fantasma" onclick="volta()">'+ic("seta",14)+'voltar</button>'+
@@ -583,6 +635,166 @@ function abaFontes(){
     : '<div class="meta" style="padding:4px 2px">Nenhuma pendente.</div>';
   return h;
 }
+
+/* ---------- MAPA MENTAL ---------- */
+var selMapa=null, fechado={};
+
+function aulas(){ return (D&&D.aulas)||[] }
+/* aula que cobre o conceito: por id declarado, por título igual, senão nada */
+function aulaDe(c){
+  var A=aulas(), n=String(c.nome).toLowerCase();
+  for(var k=0;k<A.length;k++) if((A[k].conceitos||[]).indexOf(c.id)>=0) return k;
+  for(k=0;k<A.length;k++) if(String(A[k].titulo).toLowerCase()===n) return k;
+  return -1;
+}
+function aulasDoModulo(id){
+  var r=[]; aulas().forEach(function(x,k){ if(x.modulo && slug(x.modulo)===slug(id)) r.push(k) });
+  return r;
+}
+function slug(s){ return String(s||"").toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") }
+function flashDe(c){
+  var n=String(c.nome).toLowerCase();
+  return ((D&&D.flashcards)||[]).filter(function(f){
+    return String(f.conceito||"").toLowerCase().indexOf(n)>=0 ||
+           n.indexOf(String(f.conceito||"").toLowerCase())>=0 && f.conceito });
+}
+/* primeiro parágrafo de verdade da aula, para o resumo do nó */
+function resumoDe(c){
+  var k=aulaDe(c); if(k<0) return "";
+  var L=String(aulas()[k].conteudo||"").split("\n");
+  for(var j=0;j<L.length;j++){
+    var l=L[j].trim();
+    if(!l||l.charAt(0)==="#"||l.charAt(0)==="-") continue;
+    l=l.replace(/\*\*/g,"").replace(/`/g,"").replace(/\[[^\]]*\]/g,"");
+    return l.length>190 ? l.slice(0,190).replace(/\s\S*$/,"")+"…" : l;
+  }
+  return "";
+}
+
+function abaMapa(){
+  if(!cs().length) return vazio("vazio","Nenhum conceito ainda.",
+    "O mapa nasce junto com a trilha, quando você começa um assunto com o Claude.");
+  return '<div id="mapa"></div>';
+}
+
+function pintaMapa(){
+  var alvo=document.getElementById("mapa"); if(!alvo) return;
+  var lista=cs();
+  var mods=(D.modulos&&D.modulos.length)?D.modulos:(function(){
+    var vis={},r=[]; lista.forEach(function(c){ if(!vis[c.modulo]){vis[c.modulo]=1;
+      r.push({id:c.modulo,nome:c.modulo})} }); return r })();
+
+  var ROW=44, GAP=24, XR=0, WR=176, XM=236, WM=184, XC=460, WC=272, W=XC+WC;
+  var nos=[], fios=[], y=18;
+  var comMaterial=0;
+
+  mods.forEach(function(m){
+    var L=lista.filter(function(c){ return c.modulo===m.id });
+    if(!L.length) return;
+    var col=!!fechado[m.id];
+    var ini=y, ys=[];
+    if(col){ y+=ROW*0.6 }
+    else L.forEach(function(c,i){ ys.push(y+i*ROW+ROW/2); });
+    var ym = col ? ini+ROW*0.3 : (ys[0]+ys[ys.length-1])/2;
+    var ok=L.filter(function(c){ return niv(c)===3 }).length;
+
+    nos.push('<button class="no mod" style="left:'+XM+'px;top:'+ym+'px;width:'+WM+'px" '+
+      'onclick="dobra(\''+esc(m.id)+'\')"><b>'+esc(m.nome)+
+      '<span class="cnt">'+(col?"▸":"▾")+'</span></b>'+
+      '<span class="s">'+ok+" de "+L.length+' dominados</span></button>');
+    fios.push({x1:XR+WR,y1:0,x2:XM,y2:ym,cls:""});
+
+    if(!col) L.forEach(function(c,i){
+      var yc=ys[i], n=niv(c), k=aulaDe(c), fl=flashDe(c).length;
+      if(k>=0) comMaterial++;
+      var marca = k>=0 ? '<span class="mat">'+ic("livro",11)+'aula</span>'
+                : (fl ? '<span class="mat">'+ic("estudar",11)+fl+' cartas</span>' : "");
+      nos.push('<button class="no cnc d'+n+(selMapa===c.id?" sel":"")+'" '+
+        'style="left:'+XC+'px;top:'+yc+'px;width:'+WC+'px" onclick="pico(\''+c.id+'\')">'+
+        '<b>'+esc(c.dominio)+" "+esc(c.nome)+'</b>'+
+        '<span class="s">'+NOME[n]+'</span>'+marca+'</button>');
+      fios.push({x1:XM+WM,y1:ym,x2:XC,y2:yc,cls:["","r","a","v"][n]});
+    });
+    y = (col?ini+ROW*0.6:y+L.length*ROW) + GAP;
+  });
+
+  var H=Math.max(y,120), yr=H/2;
+  fios.forEach(function(f){ if(f.y1===0) f.y1=yr });
+
+  var svg='<svg class="fios" width="'+W+'" height="'+H+'">'+fios.map(function(f){
+    var mx=(f.x1+f.x2)/2;
+    return '<path class="fio '+f.cls+'" d="M'+f.x1+' '+f.y1+' C'+mx+' '+f.y1+' '+mx+' '+f.y2+
+           ' '+f.x2+' '+f.y2+'"/>' }).join("")+'</svg>';
+
+  var raiz='<div class="no raiz" style="left:'+XR+'px;top:'+yr+'px;width:'+WR+'px">'+
+    '<b>'+esc(D.assunto||"Assunto")+'</b><span class="s">'+mods.length+" módulos · "+
+    lista.length+' conceitos</span></div>';
+
+  alvo.innerHTML =
+    '<div class="legenda">'+[3,2,1,0].map(function(k){
+      return '<span><i class="pt" style="background:'+COR[k]+'"></i>'+NOME[k]+'</span>' }).join("")+
+      '<span style="color:var(--tx3)">clique no módulo para recolher, no conceito para abrir</span>'+
+    '</div>'+
+    '<div class="card calma" style="padding:15px 18px"><span class="meta">'+
+      comMaterial+" de "+lista.length+" conceitos já têm aula escrita"+
+      (comMaterial<lista.length ? ". Os outros existem no mapa mas ainda não foram estudados." : ".")+
+    '</span></div>'+
+    '<div class="mapa"><div class="tela" style="width:'+W+'px;height:'+H+'px">'+svg+raiz+
+      nos.join("")+'</div></div>'+
+    '<div class="det" id="det"></div>';
+  pintaDetalhe();
+}
+
+function dobra(id){ fechado[id]=!fechado[id]; pintaMapa() }
+
+function pico(id){ selMapa = (selMapa===id ? null : id); pintaMapa();
+  var d=document.getElementById("det"); if(d&&selMapa) d.scrollIntoView({block:"nearest",behavior:"smooth"}) }
+
+function pintaDetalhe(){
+  var d=document.getElementById("det"); if(!d) return;
+  if(!selMapa){ d.innerHTML=""; return }
+  var c=acha(selMapa); if(!c){ d.innerHTML=""; return }
+  var k=aulaDe(c), fl=flashDe(c), res=resumoDe(c);
+  var falta=(c.prereq||[]).map(acha).filter(function(q){ return q && niv(q)<3 });
+  var pre=(c.prereq||[]).map(acha).filter(Boolean);
+  var dep=dependentes(c.id);
+
+  var lig="";
+  if(k>=0) lig+='<button onclick="doMapaAula('+k+')">'+ic("livro",15)+
+    "ler a aula: "+esc(aulas()[k].titulo)+'</button>';
+  if(fl.length) lig+='<button onclick="doMapaFlash(\''+esc(c.id)+'\')">'+ic("estudar",15)+
+    "treinar "+fl.length+" carta"+(fl.length>1?"s":"")+'</button>';
+  var doMod=aulasDoModulo(c.modulo).filter(function(x){ return x!==k });
+  if(k<0 && doMod.length) lig+='<button onclick="doMapaAula('+doMod[0]+')">'+ic("livro",15)+
+    "aula do módulo: "+esc(aulas()[doMod[0]].titulo)+'</button>';
+  pre.forEach(function(q){ lig+='<button onclick="pico(\''+q.id+'\')">'+ic("seta",15)+
+    "vem antes: "+esc(q.nome)+'</button>' });
+
+  d.innerHTML='<div class="card"><div class="entre"><div style="min-width:0">'+
+    '<div class="rot" style="margin:0 0 7px">'+ic("mapa",13)+esc(c.modulo)+'</div>'+
+    '<h2 style="font-size:21px">'+esc(c.dominio)+" "+esc(c.nome)+'</h2>'+
+    '<span class="meta">'+NOME[niv(c)]+" · confiança "+(c.conf||0)+
+      (c.proxima?" · volta em "+esc(dia(c.proxima)):"")+
+      (dep.length?" · "+dep.length+" conceito"+(dep.length>1?"s dependem":" depende")+" dele":"")+
+    '</span></div><button class="fechar" onclick="pico(null)" aria-label="Fechar">'+ic("x",17)+
+    '</button></div>'+
+    (res?'<p style="margin:13px 0 0;color:var(--tx2);max-width:68ch">'+esc(res)+'</p>':"")+
+    (falta.length?'<div class="err" style="margin-top:12px">'+ic("alerta",15)+
+      '<span>Lacuna: '+falta.map(function(q){return esc(q.nome)}).join(", ")+
+      (falta.length>1?". Eles vêm antes.":". Ele vem antes.")+'</span></div>':"")+
+    (c.erro&&c.erro!=="-"?'<div class="err" style="margin-top:10px">'+ic("alerta",15)+
+      '<span>'+esc(c.erro)+'</span></div>':"")+
+    (lig?'<div class="lig">'+lig+'</div>':
+      '<div class="saida" style="margin-top:14px"><b>Ainda não tem material</b>'+
+      '<code>me ensina '+esc(c.nome)+'</code>'+
+      '<button class="bt" style="flex:none;padding:8px 14px" onclick="copiaTxt(this,\'me ensina '+
+      esc(c.nome).replace(/'/g,"\\'")+'\')">'+ic("copia",14)+'copiar</button></div>')+
+    '</div>';
+}
+
+function doMapaAula(k){ ir("material"); abrir(k) }
+function doMapaFlash(id){ filtroFlash=id; ir("estudar") }
 
 /* ---------- BUSCA ---------- */
 function buscar(t){
@@ -639,11 +851,12 @@ function copiaEl(bt){
 
 /* ---------- montagem ---------- */
 var ABAS=[
-  {id:"hoje",     nome:"Hoje",     ic:"hoje",     fn:abaHoje,     n:function(){return vencidos().length}},
-  {id:"trilha",   nome:"Trilha",   ic:"trilha",   fn:abaTrilha},
-  {id:"estudar",  nome:"Estudar",  ic:"estudar",  fn:abaEstudar,  n:function(){return ((D&&D.flashcards)||[]).length}},
-  {id:"material", nome:"Material", ic:"material", fn:abaMaterial, n:function(){return ((D&&D.aulas)||[]).length}},
-  {id:"fontes",   nome:"Fontes",   ic:"fontes",   fn:abaFontes}
+  {id:"hoje",     nome:"Hoje",         ic:"hoje",     fn:abaHoje,     n:function(){return vencidos().length}},
+  {id:"mapa",     nome:"Mapa mental",  ic:"mapa",     fn:abaMapa},
+  {id:"trilha",   nome:"Trilha",       ic:"trilha",   fn:abaTrilha},
+  {id:"estudar",  nome:"Estudar",      ic:"estudar",  fn:abaEstudar,  n:function(){return ((D&&D.flashcards)||[]).length}},
+  {id:"material", nome:"Material",     ic:"material", fn:abaMaterial, n:function(){return ((D&&D.aulas)||[]).length}},
+  {id:"fontes",   nome:"Fontes",       ic:"fontes",   fn:abaFontes}
 ];
 var atual="hoje";
 function ir(id){
@@ -653,8 +866,9 @@ function ir(id){
   var bs=document.querySelectorAll(".nav");
   for(var k=0;k<bs.length;k++) bs[k].setAttribute("aria-selected", bs[k].dataset.id===id);
   if(id==="estudar") carta();
+  if(id==="mapa") pintaMapa();
   try{ localStorage.setItem("sm.aba",id) }catch(e){}
-  window.scrollTo({top:0});
+  if(id!=="material") window.scrollTo({top:0});
 }
 function tema(){
   var r=document.documentElement;

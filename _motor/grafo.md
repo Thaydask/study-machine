@@ -81,5 +81,9 @@ grafo é sessão perdida: na próxima abertura ela não existiu.
 
 ## O mapa mental sai daqui
 
-`mapa-mental.md` é o grafo desenhado, não um arquivo paralelo. Regenere a partir da tabela,
-nunca edite os dois na mão. Mermaid renderiza sozinho no GitHub, sem instalar nada.
+O mapa não é arquivo, é vista. A aba **Mapa mental** do `painel.html` desenha esta tabela em
+SVG toda vez que abre: raiz, módulos, conceitos, cor por domínio e o material ligado em cada nó.
+Nada para gerar e nada para manter em dia.
+
+Se você também quiser um `mapa-mental.md` em Mermaid, para ler no GitHub, gere a partir desta
+tabela e nunca edite os dois na mão. Mas ele é opcional: quem estuda usa o painel.

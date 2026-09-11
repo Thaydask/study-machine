@@ -38,7 +38,7 @@ primeiro. O contrato, em resumo:
       modulos:  [{ id, nome }],
       conceitos:[{ id, nome, modulo, prereq:[], dominio, conf, ultima, proxima, acertos, erro }],
       flashcards:[{ conceito, frente, verso }],
-      aulas:    [{ titulo, modulo, conteudo }],
+      aulas:    [{ titulo, modulo, conteudo, conceitos:["c03"] }],
       fontes:   { verificadas:[{titulo,autor,ano,nivel,url,acessada,nota}],
                   naoVerificadas:[{titulo,busca}] },
       sessoes:  [{ data, duracao, resumo }]
@@ -51,6 +51,9 @@ Regras do conteúdo:
 - **prereq** carrega os ids, não os nomes. É deles que sai o aviso de lacuna na aba Trilha
 - **aulas.conteudo** aceita markdown simples: `#` título, `-` lista, `**negrito**`, `` `código` ``
   e os rótulos de evidência entre colchetes, que a página estiliza sozinha
+- **aulas.conceitos** é opcional e é a lista de ids que aquela aula cobre. É o que liga o nó do
+  mapa mental à aula. Sem ele a página tenta casar pelo título e depois pelo módulo, o que
+  funciona mas erra quando o título da aula não é o nome do conceito. **Preencha sempre**
 - **sessoes** em ordem do mais recente para o mais antigo. A primeira aparece na aba Hoje
 - **fontes.verificadas** só recebe o que foi realmente aberto, com a data. O resto vai em
   `naoVerificadas`, e a página mostra em amarelo
@@ -63,10 +66,31 @@ contagem por domínio. Barra de busca no topo, com `Ctrl K`.
 | aba | mostra |
 |---|---|
 | Hoje | um cartão de proposta do dia, quatro contadores, a fila de revisão, o que está liberado, o que está fraco e a última sessão |
+| Mapa mental | o assunto inteiro desenhado: raiz, módulos e conceitos, com o material ligado em cada nó |
 | Trilha | os conceitos por módulo, com cor de domínio, aviso de lacuna e marcação de viga |
 | Estudar | flashcards com virar, acertei e errei, atalhos de teclado e barra de avanço |
 | Material | as aulas em cartão com ícone, e leitura em coluna de 66 caracteres |
 | Fontes | verificadas e não verificadas, com selo de nível |
+
+### O mapa mental
+
+Desenhado em SVG na hora, a partir do mesmo grafo. Sem biblioteca e sem imagem.
+
+Três colunas: o assunto, os módulos, os conceitos. A cor da borda de cada conceito é o domínio,
+e a linha que chega nele tem a mesma cor, então dá para ver o estado do assunto inteiro de
+longe. Clicar no módulo recolhe o galho, o que salva mapa de 40 conceitos.
+
+Clicar num conceito abre a ficha dele embaixo, e é ali que mora a resposta para
+"quero aprofundar":
+
+- o **resumo**, que é o primeiro parágrafo real da aula que cobre aquele conceito
+- **ler a aula**, que leva para a aba Material já com ela aberta
+- **treinar as cartas**, que leva para a aba Estudar com o baralho filtrado naquele conceito
+- **vem antes**, um botão por pré-requisito não dominado, que pula para ele no próprio mapa
+- se não existe material nenhum, o comando pronto para pedir ao Claude
+
+O nó mostra um selo de `aula` ou de `N cartas` quando tem material, então dá para ver de
+relance o que já foi estudado e o que é só planejamento.
 
 **A busca** procura em conceito, aula, fonte e flashcard ao mesmo tempo, e destaca o trecho.
 `Ctrl K` foca, `Esc` limpa.
